@@ -1,0 +1,638 @@
+@import 'mixins.scss';
+@import 'variable.scss';
+
+// toogle switch
+.customToggle-switch {
+    position: relative;
+    display: block;
+    width: 27px;
+    height: 8px;
+    margin-bottom: 0;
+}
+
+.customToggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $light-purple;
+    transition: .5s;
+}
+
+.customToggle-slider:before {
+    position: absolute;
+    content: "";
+    bottom: 4px;
+    top: 4px;
+    left: -1px;
+    background-color: $dark-purple;
+    transition: .5s;
+}
+
+.customToggle-slider-disabled {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: grey;
+    transition: .5s;
+}
+
+.customToggle-slider-disabled:before {
+    position: absolute;
+    content: "";
+    bottom: 4px;
+    top: 4px;
+    background-color: grey;
+    transition: .5s;
+    border: 1px solid $white;
+}
+
+.customToggle-switch input {
+    display: none;
+}
+
+input:checked+.customToggle-slider {
+    background-color: $light-purple;
+}
+
+input:checked+.customToggle-slider:before {
+    transform: translateX(14px);
+    background-color: $dark-purple;
+}
+
+.customToggle-slider.round:before {
+    top: -4px;
+    width: 15px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+input:checked+.customToggle-slider-disabled.round:before {
+    top: -4.5px;
+}
+
+.customToggle-slider.round:hover:before {
+    width: 15.8px;
+}
+
+input:checked+.customToggle-slider-disabled:before {
+    transform: translateX(14px);
+    background-color: grey;
+}
+
+.customToggle-slider-disabled.round {
+    border-radius: 35px;
+}
+
+.customToggle-slider-disabled.round:before {
+    top: -4px;
+    width: 15px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+// accordion
+.wrapper {
+    width: 300px;
+    margin: 10px auto;
+    border: 1px solid $purple;
+}
+
+.accordion-wrapper {
+    &:not(:last-child) {
+        border-bottom: 1px solid $purple;
+    }
+}
+
+.accordion-item {
+    overflow: hidden;
+    transition: max-height .3s cubic-bezier(1, 0, 1, 0);
+    height: auto;
+    max-height: 9999px;
+}
+
+.accordion-item.collapsed {
+    max-height: 0;
+    transition: max-height .35s cubic-bezier(0, 1, 0, 1);
+}
+
+.accordion-title {
+    cursor: pointer;
+    padding: .5em 1.5em;
+    font-size: 16px;
+    color: $purple;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:before {
+        content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAVklEQVR4nGNgGAWjAAL+M0IwTcB/xmiO9olRHO0zaGJJNHu7QzRH+79ojo7/IItoZElHOswSGvqkY9SSQRBU0aOGD1BG+88YxdExgWYZjA6F3SgY6gAAOC5aBG90f3IAAAAASUVORK5CYII=");
+    }
+
+    &.open {
+        &:before {
+            content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAnUlEQVR4nGNgGAWjYBTgAf8Zozk6asPZ2xXwqYpk78iM5ew0YSAVgAyP5uj4H83RcR+XJVFsHXnRHO3/otjb3xNyCAaI5eiQi+bouAuyJIq942EUe7sSigPYO9JBhoPlOdpngHxMsi9wWUIVw2EgnL1dARRMsOCKYm9vghkezdE+kSLDsfkEhil2OT5LoqhtOFpw1dLE8FEwCoYxAAAqDFR+D4IA3gAAAABJRU5ErkJggg==")
+        }
+    }
+}
+
+.accordion-content {
+    font-size: 16px;
+    color: $purple;
+}
+
+.accordion-data {
+    padding: .5em 1.5em;
+
+    &:hover {
+        background-color: $pale-purple;
+        box-shadow: 5px 0 0 -3px $pale-purple;
+    }
+}
+
+// slider-tooltip
+.placeholder-bold {
+    position: relative;
+    display: inline-block;
+}
+
+.placeholder-bold::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: attr(placeholder-bold);
+    pointer-events: none;
+    opacity: 1;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    color: #12417f;
+}
+
+.slideContainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background-color: linear-gradient(90deg, rgb(35, 220, 212)60%, rgb(193, 210, 226)60%);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 12px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: grey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider::-moz-range-progress {
+    width: 15px;
+    background-color: grey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.popover{
+    // --bs-popover-bg: white!important;
+    box-shadow: 1px 0px 10px -1px #E5CFF7;
+    --bs-popover-border-color:none;
+    --bs-border-color-translucent:none;
+}
+// .bottom>.popover-arrow{
+//     --bs-border-color-translucent:none; 
+//     --bs-popover-border-color:none;
+//     box-shadow: 1px 0px 10px -1px #E5CFF7;
+//     --bs-popover-bg:white;
+// }
+// .popover-bottom>.popover-arrow::after .bs-popover-bottom>.popover-arrow::before{
+//     --bs-border-color-translucent:none; 
+//     --bs-popover-border-color:none;
+//     box-shadow: 1px 0px 10px -1px #E5CFF7;
+//     --bs-popover-bg:white;
+// }
+// .popover .popover-arrow::after{
+//     border-color:none;
+//     --bs-popover-bg:white;
+//     --bs-popover-border-color:none;
+// }
+
+// editable dropdown
+.editcustom-dropdown ,.custom-dropdown{
+    position: relative;
+    margin: 0 auto;
+    user-select: none;
+}
+
+.editdropdown-btn {
+    cursor: pointer;
+    position: relative;
+    background-color: $white;
+    color: $dark-purple;
+    border-bottom: 1px solid $purple;
+    display: flex;
+
+    &:focus {
+        border-color: $dark-purple;
+    }
+
+    input {
+        color: $dark-purple;
+        caret-color: $dark-purple;
+        border: none;
+        background-color: $white;
+        font-size: 14px;
+        outline: 0;
+        box-shadow: none;
+        width: 100%;
+        font-weight: 600;
+        padding-left: 0;
+
+        &::placeholder {
+            color: $light-purple;
+            font-weight: 400;
+        }
+    }
+}
+
+.editdropdown-content,.dropdown-content {
+    position: absolute;
+    top: 110%;
+    z-index: 100;
+    left: 0;
+    padding: 0;
+    background-color: $white;
+    box-shadow: 2px 2px 4px 0px $pale-purple;
+    width: 120%;
+
+
+    .editdropdown-item,.dropdown-item {
+        padding: 6px;
+        cursor: pointer;
+        transition: all .2s;
+        color: $purple;
+        font-size: 14px;
+
+        &:hover {
+            color: $purple;
+            background-color: $pale-purple;
+        }
+
+        &:focus {
+            color: $purple;
+            background-color: $pale-purple;
+        }
+
+        &:active {
+          font-weight: 600;
+            background-color: $pale-purple;
+        }
+    }
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    cursor: pointer;
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0)0%, rgba(0, 0, 0, 0)43%, $dark-purple 55%, rgba(0, 0, 0, 0) 57%, rgba(0, 0, 0, 0)100%),
+        linear-gradient(135deg, transparent 0%, transparent 43%, $dark-purple 45%, $dark-purple 55%, transparent 57%, transparent 100%)
+}
+
+// multiselection-dropdown
+.dropLabel {
+    color: $dark-purple;
+    font-size: 14px;
+    height: 14px;
+    padding-right: 18px;
+}
+
+.multi-dropdown {
+    position: relative;
+    margin: 0 auto;
+    user-select: none;
+
+    .dropdown-btn {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        position: relative;
+        background-color: $white;
+        color: $dark-purple;
+        border-bottom: 1px solid $purple;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        top: 110%;
+        z-index: 100;
+        left: 0;
+        padding: 0px;
+        background-color: $white;
+        box-shadow: -1px 4px 13px -1px $pale-purple;
+        width: 120%;
+    }
+}
+
+.multi-searchCol {
+    padding: 18px 10px 0px 8px;
+}
+
+.multi-search {
+    border-bottom: 1px solid $purple;
+
+    input {
+        border: 0;
+        outline: 0;
+        caret-color: $dark-purple;
+        color: $purple;
+        font-size: 15px;
+        width: 13.93vw;
+
+        &::placeholder {
+            color: $pale-purple;
+        }
+    }
+
+
+}
+
+.multi-droprow {
+    border-bottom: 1px solid lightgray;
+}
+
+div.multi-dropCol {
+    padding: 12px 8px;
+
+    input[type="checkbox"] {
+        position: absolute;
+        width: 13px;
+        height: 12px;
+        border: 1px solid $purple;
+        border-radius: 2px;
+        appearance: none;
+        outline: 0;
+        cursor: pointer;
+        transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+
+        &:before {
+            position: absolute;
+            content: '';
+            display: block;
+            top: 0;
+            left: 4px;
+            width: 4px;
+            height: 9px;
+            border-style: solid;
+            border-color: $white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(41deg);
+            opacity: 0;
+        }
+
+        &:checked {
+            color: $white;
+            border: $purple;
+            background: $purple;
+
+            &::before {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            border-color: $purple;
+            background-color: $purple;
+        }
+
+    }
+}
+
+.multi-dropAll {
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 8px;
+    font-size: 15px;
+    color: $purple;
+}
+
+.multi-droplen {
+    font-size: 15px;
+    color: $purple;
+}
+.labelnomatch{
+    cursor: pointer;
+    color: $purple;
+    font-size: 14px;
+    height: 14px;
+}
+
+.droptext {
+    cursor: pointer;
+    color: $purple;
+    font-size: 14px;
+    height: 14px;
+    padding-left: 8px;
+}
+
+.droptext-disabled {
+    cursor: pointer;
+    color: rgb(172, 172, 172);
+    font-size: 14px;
+    height: 14px;
+    padding-left: 8px;
+}
+
+.droptext-readOnly {
+    cursor: not-allowed;
+    color: $purple;
+    font-size: 14px;
+    height: 14px;
+    padding-left: 8px;
+}
+
+.input-readonly {
+    cursor: not-allowed !important;
+}
+
+.multicheck {
+    height: 42vh;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: .5vw;
+        height: 45vh;
+        padding: 0;
+
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: $pale-purple;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: $light-purple;
+    }
+}
+
+div.multiCheckCol {
+    padding: 12px 8px;
+}
+
+.multiChecklist {
+    list-style: none;
+    cursor: pointer;
+    height: 28px;
+}
+
+.multiChecklist {
+    input[type="checkbox"] {
+        position: relative;
+        width: 13px;
+        height: 13px;
+        color: rgb(99, 88, 88);
+        border: 1px solid $purple;
+        border-radius: 2px;
+        appearance: none;
+        outline: 0;
+        cursor: pointer;
+        transition: background 175ms cubic-bezier(0.1, 0.1 0.25, 1);
+
+        &:before {
+            position: absolute;
+            content: "";
+            display: block;
+            top: 0.8px;
+            left: 5px;
+            width: 3px;
+            height: 9px;
+            border-style: solid;
+            border-color: $white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(41deg);
+            opacity: 0;
+        }
+
+        &:checked {
+            color: $white;
+            border: $purple;
+            background: $purple;
+
+            &::before {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            border-color: $purple;
+            background-color: $purple;
+        }
+    }
+}
+
+.multiChecklist input[type=checkbox]:disabled {
+    cursor: default;
+    border-color: #93aac9;
+    background-color: $white;
+
+    &:hover {
+        border-color: #93aac9;
+        background-color: $white;
+    }
+}
+
+.multiChecklist input[type=checkbox][disabled]:checked {
+    cursor: default;
+
+    &:checked {
+        color: $white;
+        border-color: #93aac9;
+        background-color: #93aac9;
+
+        &::before {
+            opacity: 1;
+            border-color: $white;
+        }
+    }
+
+    &:hover {
+        border-color: #93aac9;
+        background-color: #93aac9;
+    }
+}
+
+.multisearchIcon {
+    color: $purple;
+}
+
+// dropdown
+// .custom-dropdown{
+//     position:relative;
+//     /* width: 150px; */
+//     margin:0 auto;
+//     user-select: none;
+//   }
+  .dropdown-btn{
+    cursor: pointer;
+    position:relative;
+    background-color: #fff;
+    color:$dark-purple;
+    border-bottom: 1px solid $purple;
+    font-weight:600;
+    font-size: 14px;
+  }
+  .custom-arrow{
+    position:absolute;
+    top:0;
+    right:0;
+    display:block;
+    background-color: #fff;
+    pointer-events: none;
+  }
+//   .dropdown-content{
+//     position:absolute;
+//     top:110%;
+//     z-index:100;
+//     left:0;
+//     padding:0px;
+//     background-color: #fff;
+//     box-shadow: 2px 2px 5px 2px grey;
+//     width:120%;
+//   }
+//   .custom-dropdown .dropdown-content .dropdown-item{
+//     padding:6px;
+//     cursor:pointer;
+//     transition: all 0.2s;
+//     color:blue;
+//     font-size: 14px;
+//     &:hover{
+//         background-color: pink;
+//     }
+//     &:focus{
+//         background:yellow;
+//     }
+//     &:active{
+//         font-weight:600;
+//         background-color: aqua;
+//     }
+//   }
+  
